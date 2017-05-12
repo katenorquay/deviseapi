@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.2'
 gem 'devise_token_auth', '~> 0.1.36'
 gem 'omniauth', '~> 1.3.0'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
