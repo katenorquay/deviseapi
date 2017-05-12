@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise', '~> 4.2'
-gem 'devise_token_auth', '~> 0.1.36'
+gem 'devise_token_auth', '>= 0.1.32.beta9'
 gem 'omniauth', '~> 1.3.0'
 gem 'rack-cors', :require => 'rack/cors'
 

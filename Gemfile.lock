@@ -178,7 +178,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise (~> 4.2)
-  devise_token_auth (~> 0.1.36)
+  devise_token_auth (>= 0.1.32.beta9)
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
