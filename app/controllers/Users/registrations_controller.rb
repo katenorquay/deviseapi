@@ -1,5 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 before_action :configure_sign_up_params, only: [:create]
+before_action :configure_account_update_params, only: [:update]
 respond_to :json
 # before_action :configure_account_update_params, only: [:update]
 
@@ -10,7 +11,7 @@ respond_to :json
 
   # POST /resource
   def create
-    user = User.new(configure_sign_up_params)
+    @user = User.new(configure_sign_up_params)
     if user.save
       render :json=> user.as_json(:email=>user.email), :status=>201
       return
@@ -26,9 +27,17 @@ respond_to :json
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    @user = User.find_by_email(configure_account_update_params[:email])
+    byebug
+    if @user.update_attributes(configure_account_update_params)
+      render :json=> user.as_json(:email=>user.email), :status=>201
+      return
+    else
+      warden.custom_failure!
+      render :json=> user.errors, :status=>422
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -49,6 +58,10 @@ respond_to :json
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     params.permit(:email, :password, :password_confirmation, :commit)
+  end
+
+  def configure_account_update_params
+    params.permit(:email, :password, :password_confirmation, :current_password)
   end
 
   # If you have extra params to permit, append them to the sanitizer.
