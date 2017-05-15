@@ -12,12 +12,12 @@ respond_to :json
   # POST /resource
   def create
     @user = User.new(configure_sign_up_params)
-    if user.save
-      render :json=> user.as_json(:email=>user.email), :status=>201
+    if @user.save
+      render :json=> @user.as_json(:email=> @user.email), :status=>201
       return
     else
       warden.custom_failure!
-      render :json=> user.errors, :status=>422
+      render :json=> @user.errors, :status=>422
     end
   end
 
@@ -29,13 +29,12 @@ respond_to :json
   # PUT /resource
   def update
     @user = User.find_by_email(configure_account_update_params[:email])
-    byebug
     if @user.update_attributes(configure_account_update_params)
-      render :json=> user.as_json(:email=>user.email), :status=>201
+      render :json=> @user.as_json(:email=> @user.email), :status=>201
       return
     else
       warden.custom_failure!
-      render :json=> user.errors, :status=>422
+      render :json=> @user.errors, :status=>422
     end
   end
 
